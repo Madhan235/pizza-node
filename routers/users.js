@@ -94,7 +94,7 @@ transporter.sendMail(mailDetails,function(err){
    }    
 })
 
-router.post(`user/reset/:id/:token`,async (req,res)=>{
+router.post(`userreset/:id/:token`,async (req,res)=>{
     try {
         const id = req.params.id; 
         const token = req.params.token;
