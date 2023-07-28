@@ -27,7 +27,7 @@ const token = generateJwtToken(newUser._id)
 res.status(200).json({data:hashedUser,token:token})    
 } catch (error) {
     console.log(error)
-    res.status(500).json({error:error.message})
+    res.status(500).json({error:error})
 }
 })
 
@@ -49,7 +49,7 @@ if(!validatePass){
 res.status(200).json({data:{message:"Successfully Logged-In"}})
 } catch (error) {
     console.log(error)
-    res.status(400).json({error:error.message})
+    res.status(400).json({error:error})
 }
 })
 
@@ -88,7 +88,7 @@ transporter.sendMail(mailDetails,function(err){
 })
 
    } catch (error) {
-    res.status(500).json({error:error.message});
+    res.status(500).json({error:error});
 
    }    
 })
@@ -125,7 +125,7 @@ const newhashedPassword = await bcrypt.hash(password,salt)
 
     } catch (error) {
         console.log(error)
-        res.status(400).json({error:error.message})
+        res.status(400).json({error:error})
     }
 })
 
