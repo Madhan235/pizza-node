@@ -94,7 +94,7 @@ transporter.sendMail(mailDetails,function(err){
    }    
 })
 
-router.post(`userreset/:id/:token`,async (req,res)=>{
+router.post(`/userreset/:id/:token`,async (req,res)=>{
     try {
         const id = req.params.id; 
         const token = req.params.token;
@@ -125,7 +125,6 @@ const newhashedPassword = await bcrypt.hash(password,salt)
         message:"password successfully changed"}})
 
     } catch (error) {
-        console.log(error)
         res.status(500).json({data:{error:error.message}})
     }
 })
