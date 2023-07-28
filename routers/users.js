@@ -51,6 +51,7 @@ res.status(200).json({data:{message:"Successfully Logged-In"}})
 } catch (error) {
     console.log(error)
     res.status(500).json({data:{error:error.message}})
+}
 })
 
 router.post("/forget",async function(req,res){
