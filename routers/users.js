@@ -54,7 +54,7 @@ res.status(200).json({data:{message:"Successfully Logged-In"}})
 }
 })
 
-router.post("/forget",async function(req,res){
+router.post("/userforget",async function(req,res){
    try {
     const {email} = req.body;
 const user = await findUser(email)
