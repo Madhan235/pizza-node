@@ -13,11 +13,11 @@ export function findAdmin(userEmail){
     .findOne({email:userEmail})
 }
 
-export function generateJwtToken(id){
+export function generateAdminJwtToken(id){
 return jwt.sign({id},process.env.secretkey,{expiresIn:"10d"})
 }
 
-export function generateForgetToken(id,password){
+export function generateAdminForgetToken(id,password){
     const secret = process.env.secretkey + password
 return jwt.sign({id},secret,{expiresIn:"1m"})
 }

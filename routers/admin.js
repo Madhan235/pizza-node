@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
-import { addAdmin, findAdmin, findAdminbyId, generateForgetToken, generateJwtToken, updateAdminPassword } from "../logics/admin.js";
+import { addAdmin, findAdmin, findAdminbyId, generateAdminForgetToken, generateAdminJwtToken, updateAdminPassword } from "../logics/admin.js";
 const router = express.Router();
 
 router.post("/signup", async (req,res)=>{
@@ -22,7 +22,7 @@ const {email,password} = req.body
     const hashedUser = {...req.body,password:hashedPassword}
 const newUser = await addAdmin(hashedUser)
 
-const token = generateJwtToken(newUser._id)
+const token = generateAdminJwtToken(newUser._id)
 
 res.status(200).json({data:hashedUser,token:token})    
 } catch (error) {
@@ -60,7 +60,7 @@ const user = await findAdmin(email)
 if(!user){
     return res.status(404).json({data:{error:"email not registered"}})
 }
-const token =  generateForgetToken(user._id,user.password);
+const token =  generateAdminForgetToken(user._id,user.password);
 const link = `http://localhost:3000/adminreset/${user._id}/${token}`
 
 let transporter = nodemailer.createTransport({
