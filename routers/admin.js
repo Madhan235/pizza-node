@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/signup", async (req,res)=>{
 try {
 const {email,password} = req.body
- res.send(email,password)
+ res.status(200).json({email,password})
     if(email === "" || password === ""){
         return res.status(400).json({data:{error:"Invalid details"}})
             }
