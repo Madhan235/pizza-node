@@ -27,7 +27,7 @@ const token = generateJwtToken(newUser._id)
 res.status(200).json({data:hashedUser,token:token})    
 } catch (error) {
     console.log(error)
-    res.status(500).json({data:"code error"})
+    res.status(500).json({data:error.message})
 }
 })
 
