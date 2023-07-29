@@ -26,7 +26,9 @@ const token = generateAdminJwtToken(newUser._id)
 
 res.status(200).json({data:hashedUser,token:token})    
 } catch (error) {
-    res.status(500).json({data:{missing:error.message}})
+    res.status(500).json({
+        data:{error:
+error.message,email,password,hashedUser}})
 }
 })
 
