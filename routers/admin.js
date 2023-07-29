@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
-import { addAdmin, findAdmin, generateForgetToken, generateJwtToken } from "../logics/admin.js";
+import { addAdmin, findAdmin, findAdminbyId, generateForgetToken, generateJwtToken, updateAdminPassword } from "../logics/admin.js";
 const router = express.Router();
 
 router.post("/signup", async (req,res)=>{
@@ -56,12 +56,12 @@ res.status(200).json({data:{message:"Successfully Logged-In"}})
 router.post("/forget",async function(req,res){
    try {
     const {email} = req.body;
-const user = await findUser(email)
+const user = await findAdmin(email)
 if(!user){
     return res.status(404).json({data:{error:"email not registered"}})
 }
 const token =  generateForgetToken(user._id,user.password);
-const link = `http://localhost:9007/admin/reset/${user._id}/${token}`
+const link = `http://localhost:3000/adminreset/${user._id}/${token}`
 
 let transporter = nodemailer.createTransport({
     service:"gmail",
@@ -92,14 +92,14 @@ transporter.sendMail(mailDetails,function(err){
    }    
 })
 
-router.post(`admin/reset/:id/:token`,async (req,res)=>{
+router.post(`/adminreset/:id/:token`,async (req,res)=>{
     try {
         const id = req.params.id; 
         const token = req.params.token;
         
           
         const {password,confirm} = req.body
-    const user = await findUserbyId(id);
+    const user = await findAdminbyId(id);
     const secret = process.env.secretkey + user.password;
     const verifyToken = jwt.verify(token,secret) 
     if(!user){
@@ -115,7 +115,7 @@ if(password !== confirm) {
 const salt = await bcrypt.genSalt(10);
 const newhashedPassword = await bcrypt.hash(password,salt)
 // const newhashedUser = {...req.body,password:newhashedPassword}
-    const result = await updatePassword(id,newhashedPassword)
+    const result = await updateAdminPassword(id,newhashedPassword)
     
      
     

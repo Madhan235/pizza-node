@@ -22,13 +22,13 @@ export function generateForgetToken(id,password){
 return jwt.sign({id},secret,{expiresIn:"1m"})
 }
 
-export function findUserbyId(id){
+export function findAdminbyId(id){
     return client.db("pizza")
     .collection("admin")
     .findOne({_id: new ObjectId(id)})
 }
 
-export function updatePassword(id,newpassword){
+export function updateAdminPassword(id,newpassword){
     return client.db("pizza")
     .collection("admin")
     .findOneAndUpdate({_id: new ObjectId(id)},{$set:{password:newpassword}})
