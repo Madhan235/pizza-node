@@ -8,10 +8,10 @@ const router = express.Router();
 router.post("/signup", async (req,res)=>{
 try {
 const {email,password} = req.body
- res.status(200).json({email,password})
     if(email === "" || password === ""){
         return res.status(400).json({data:{error:"Invalid details"}})
             }
+
     const admin = await findAdmin(email);
     if(admin){
         return res.status(400).json({data:{error:"Email already Registered"}})
@@ -20,7 +20,9 @@ const {email,password} = req.body
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password,salt);
     const hashedUser = {...req.body,password:hashedPassword}
-const newUser = await addAdmin(hashedUser)
+    res.status(200).json({hashedUser})
+
+    const newUser = await addAdmin(hashedUser)
 console.log(hashedUser)
 const token = generateAdminJwtToken(newUser._id)
 
