@@ -12,8 +12,8 @@ const {email,password} = req.body
     if(email === "" || password === ""){
         return res.status(400).json({data:{error:"Invalid details"}})
             }
-    const user = await findAdmin(email);
-    if(user){
+    const admin = await findAdmin(email);
+    if(admin){
         return res.status(400).json({data:{error:"Email already Registered"}})
     }
     
@@ -28,7 +28,7 @@ res.status(200).json({data:hashedUser,token:token})
 } catch (error) {
     res.status(500).json({
         data:{error:
-error.message,email,password,hashedUser}})
+error.message,hashedUser}})
 }
 })
 
