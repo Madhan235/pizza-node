@@ -1,5 +1,5 @@
 import express from 'express';
-import { getOptions } from '../logics/users';
+import { getOptions } from '../logics/users.js';
 const router = express.Router();
 
 router.get("/options",async(req,res)=>{
