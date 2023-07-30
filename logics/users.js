@@ -34,3 +34,8 @@ export function updatePassword(id,newpassword){
     .findOneAndUpdate({_id: new ObjectId(id)},{$set:{password:newpassword}})
     }
     
+export function getOptions(){
+    return client.db("options")
+    .collection("crust","cheese")
+    .find().toArray();
+}
