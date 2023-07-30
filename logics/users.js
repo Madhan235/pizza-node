@@ -36,6 +36,6 @@ export function updatePassword(id,newpassword){
     
 export function getOptions(){
     return client.db("options")
-    .collection("crust","cheese")
+    .listCollections("crust","sauce","cheese","veggies","meat")
     .find().toArray();
 }
