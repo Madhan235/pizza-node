@@ -35,7 +35,26 @@ export function updatePassword(id,newpassword){
     }
     
 export function getOptions(){
-    return client.db("options")
-    .listCollections("crust","sauce","cheese","veggies","meat")
+
+ client.db("options")
+    .Collection("crust")
     .find().toArray();
+
+   client.db("options")
+    .Collection("sauce")
+    .find().toArray();
+
+    client.db("options")
+    .Collection("cheese")
+    .find().toArray();
+ 
+    client.db("options")
+    .Collection("veggies")
+    .find().toArray();
+
+    client.db("options")
+    .Collection("meat")
+    .find().toArray();
+
+    return 
 }
