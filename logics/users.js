@@ -36,31 +36,31 @@ export function updatePassword(id,newpassword){
     
 export function getCrust(){
 return client.db("options")
-    .Collection("crust")
+    .collection("crust")
     .find().toArray();
 }
 
 export function getSauce(){
     return client.db("options")
-        .Collection("sauce")
+        .collection("sauce")
         .find().toArray();
     }
 
    export function getCheese(){
 return client.db("options")
-    .Collection("cheese")
+    .collection("cheese")
     .find().toArray();
 }
  
 export function getVeggies(){
     return client.db("options")
-        .Collection("veggies")
+        .collection("veggies")
         .find().toArray();
     }
 
     export function getMeat(){
         return client.db("options")
-            .Collection("meat")
+            .collection("meat")
             .find().toArray();
         }
 
