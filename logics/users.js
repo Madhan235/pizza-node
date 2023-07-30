@@ -34,27 +34,33 @@ export function updatePassword(id,newpassword){
     .findOneAndUpdate({_id: new ObjectId(id)},{$set:{password:newpassword}})
     }
     
-export function getOptions(){
-
- client.db("options")
+export function getCrust(){
+return client.db("options")
     .Collection("crust")
     .find().toArray();
+}
 
-   client.db("options")
-    .Collection("sauce")
-    .find().toArray();
+export function getSauce(){
+    return client.db("options")
+        .Collection("sauce")
+        .find().toArray();
+    }
 
-    client.db("options")
+   export function getCheese(){
+return client.db("options")
     .Collection("cheese")
     .find().toArray();
- 
-    client.db("options")
-    .Collection("veggies")
-    .find().toArray();
-
-    client.db("options")
-    .Collection("meat")
-    .find().toArray();
-
-    return 
 }
+ 
+export function getVeggies(){
+    return client.db("options")
+        .Collection("veggies")
+        .find().toArray();
+    }
+
+    export function getMeat(){
+        return client.db("options")
+            .Collection("meat")
+            .find().toArray();
+        }
+

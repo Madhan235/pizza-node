@@ -1,11 +1,24 @@
 import express from 'express';
-import { getOptions } from '../logics/users.js';
+import { getCheese, getCrust,getMeat,getSauce, getVeggies } from '../logics/users.js';
 const router = express.Router();
 
 router.get("/options",async(req,res)=>{
     try {
-        const pizzaData = await getOptions();
-        res.status(200).json({pizzaData: pizzaData});
+        const crustData = await getCrust();
+        const sauceData = await getSauce();
+        const cheeseData = await getCheese();
+        const veggiesData = await getVeggies();
+        const meatData = await getMeat();
+        res.status(200).json({pizzaData: {
+
+            crustData,
+            sauceData,
+            cheeseData,
+            veggiesData,
+            meatData
+        }
+
+        });
     } catch (error) {
         res.status(500).json({error: error.message});
     }
